@@ -30,10 +30,5 @@ npm install
 npm run dev
 ```
 
-6. Rode o mobile
-```
-npm run start
-```
-
-7. Pronto! Estarão disponíveis no localhost padrão ✅
+6. Pronto! Estarão disponíveis no localhost padrão ✅
 
