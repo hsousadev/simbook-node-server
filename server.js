@@ -101,13 +101,17 @@ server.get("/users", async (request) => {
   return users;
 });
 
-server.get("/auth-user", async (request) => {
+server.get("/auth-user", async (request, reply) => {
   const password = request.query.password;
   const username = request.query.username;
 
   const authUser = await usersDatabase.auth(password, username);
 
-  return authUser;
+  if (authUser) {
+    return authUser;
+  } else {
+    reply.send("Credencias inválidas!");
+  }
 });
 
 server.put("/users/:id", async (request, reply) => {

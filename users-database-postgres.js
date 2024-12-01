@@ -29,10 +29,20 @@ export class UsersDatabasePostgres {
 
   async auth(password, username) {
     const user = await sql`
-      SELECT * FROM users WHERE username = ${username} AND password = ${password}
-    `;
+    SELECT * FROM users WHERE username = ${username}
+  `;
 
-    return user;
+    if (user.length === 0) {
+      return null;
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user[0].password);
+
+    if (isPasswordValid) {
+      return user[0];
+    } else {
+      return null;
+    }
   }
 
   async update(id, user) {
