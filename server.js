@@ -1,4 +1,6 @@
 import { fastify } from "fastify";
+import cors from "@fastify/cors";
+
 import { hash } from "bcrypt";
 
 import { BooksDatabasePostgres } from "./books-database-postgres.js";
@@ -8,6 +10,11 @@ const server = fastify();
 
 const booksDatabase = new BooksDatabasePostgres();
 const usersDatabase = new UsersDatabasePostgres();
+
+// Configurar CORS
+server.register(cors, {
+  origin: "*",
+});
 
 // Books --------------------------------
 server.get("/books", async (request) => {
