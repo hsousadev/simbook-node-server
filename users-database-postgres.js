@@ -27,6 +27,14 @@ export class UsersDatabasePostgres {
     return users;
   }
 
+  async auth(password, username) {
+    const user = await sql`
+      SELECT * FROM users WHERE username = ${username} AND password = ${password}
+    `;
+
+    return user;
+  }
+
   async update(id, user) {
     const { username, name, permission, imgurl } = user;
 

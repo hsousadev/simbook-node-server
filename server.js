@@ -1,8 +1,6 @@
 import { fastify } from "fastify";
 import cors from "@fastify/cors";
 
-import { hash } from "bcrypt";
-
 import { BooksDatabasePostgres } from "./books-database-postgres.js";
 import { UsersDatabasePostgres } from "./users-database-postgres.js";
 
@@ -77,13 +75,11 @@ server.post("/users", async (request, reply) => {
   }
 
   try {
-    const hashedPassword = await hash(password, 10);
-
     await usersDatabase.create({
       username,
       permission,
       name,
-      password: hashedPassword,
+      password,
       imgurl,
     });
 
@@ -103,6 +99,15 @@ server.get("/users", async (request) => {
   const users = await usersDatabase.list(search);
 
   return users;
+});
+
+server.get("/auth-user", async (request) => {
+  const password = request.query.password;
+  const username = request.query.username;
+
+  const authUser = await usersDatabase.auth(password, username);
+
+  return authUser;
 });
 
 server.put("/users/:id", async (request, reply) => {
