@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+
 import { sql } from "./db.js";
 
 export class UsersDatabasePostgres {
@@ -36,7 +37,7 @@ export class UsersDatabasePostgres {
       return null;
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user[0].password);
+    const isPasswordValid = (await password) === user[0].password;
 
     if (isPasswordValid) {
       return user[0];

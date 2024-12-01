@@ -107,11 +107,19 @@ server.get("/auth-user", async (request, reply) => {
 
   const authUser = await usersDatabase.auth(password, username);
 
-  if (authUser) {
-    return authUser;
-  } else {
-    reply.send("Credencias inválidas!");
+  const loggedUser = {
+    id: authUser?.id,
+    username: authUser?.username,
+    name: authUser?.name,
+    imgurl: authUser?.imgurl,
+    permission: authUser?.permission,
+  };
+
+  if (!authUser) {
+    return reply.status(401).send("Credencias inválidas!");
   }
+
+  return loggedUser;
 });
 
 server.put("/users/:id", async (request, reply) => {
