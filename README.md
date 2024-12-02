@@ -1,6 +1,8 @@
 # Simbook 
 App simples de gerenciamento de livros e usuários. Feito com Fastify e Postgres.
 
+🟢 Disponível Online Link: https://simbook-web.vercel.app/
+
 ## 🚀 Build
 
 1. É necessário ter os seguintes requisitos pré-instalados
