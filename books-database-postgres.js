@@ -6,9 +6,9 @@ export class BooksDatabasePostgres {
     let books;
 
     if (search) {
-      books = await sql`select * from books where title ilike  ${
+      books = await sql`select * from books where title ilike ${
         "%" + search + "%"
-      } `;
+      } or genre ilike ${"%" + search + "%"}`;
     } else {
       books = await sql`select * from books`;
     }
