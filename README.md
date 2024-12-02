@@ -1,5 +1,5 @@
 # Simbook 
-App simples de gerenciamento de livros
+App simples de gerenciamento de livros e usuários. Feito com Fastify e Postgres.
 
 ## 🚀 Build
 
